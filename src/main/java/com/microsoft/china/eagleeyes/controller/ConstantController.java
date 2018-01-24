@@ -1,16 +1,18 @@
 package com.microsoft.china.eagleeyes.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class ScoreController {
+public class ConstantController {
 
-	@RequestMapping(path = "score", method = RequestMethod.GET)
-	public String score() {
-		return SCORE;
+	@RequestMapping(path = "constant", method = RequestMethod.GET)
+	public String list(Model model) {
+		
+		return CONSTANT;
 	}
 	
-	private static final String SCORE = "/score";
+	private static final String CONSTANT = "/constant";
 }
