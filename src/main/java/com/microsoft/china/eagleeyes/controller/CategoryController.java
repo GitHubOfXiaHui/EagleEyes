@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/category")
 public class CategoryController {
 
-	@RequestMapping(path = "category", method = RequestMethod.GET)
-	public String category() {
+	@RequestMapping(path = "/list", method = RequestMethod.GET)
+	public String list() {
 		return CATEGORY;
 	}
 	

@@ -2,7 +2,7 @@ spring:
   thymeleaf:
     cache: false
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/eagleeyes
+    url: jdbc:mysql://127.0.0.1:3306/eagleeyes?useSSL=true
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver

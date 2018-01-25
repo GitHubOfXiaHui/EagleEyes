@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
@@ -19,11 +17,9 @@ public abstract class BaseEntity implements Serializable {
 	protected Integer id;
 	
 	@Column(name = "create_time")
-	@Temporal(TemporalType.TIMESTAMP)
 	protected Timestamp createTime;
 
 	@Column(name = "last_modified")
-	@Temporal(TemporalType.TIMESTAMP)
 	protected Timestamp lastModified;
 
 	public Integer getId() {
