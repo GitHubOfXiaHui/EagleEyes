@@ -9,6 +9,10 @@ import com.microsoft.china.eagleeyes.entity.PurchaseOrder;
 
 public interface PurchaseOrderService {
 
-	List<PurchaseOrder> upload(MultipartFile po) throws IOException;
+	List<PurchaseOrder> upload(MultipartFile poFile) throws IOException;
+
+	List<PurchaseOrder> findAll();
+
+	void share();
 
 }

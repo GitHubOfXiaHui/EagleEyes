@@ -1,12 +1,14 @@
 package com.microsoft.china.eagleeyes.entity;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "constant", uniqueConstraints = {@UniqueConstraint(columnNames = {"rule", "name"})})
+@Table(name = "constant")
 public class Constant extends BaseEntity {
 
 	private static final long serialVersionUID = 8142756743152725365L;
@@ -14,13 +16,15 @@ public class Constant extends BaseEntity {
 	@Column(nullable = false)
 	private String rule;
 	
-	@Column(nullable = false)
+	@Column(unique = true, nullable = false)
 	private String name;
 	
 	@Column(nullable = false)
 	private Integer value;
 	
-	@Column
+	@Lob
+	@Basic(fetch = FetchType.EAGER)
+	@Column(columnDefinition = "TEXT")
 	private String remarks;
 
 	public String getRule() {

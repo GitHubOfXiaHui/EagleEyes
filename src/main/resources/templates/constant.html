@@ -23,12 +23,12 @@
 		<form class="form-inline" action="/constant/search" method="POST"
 			role="form">
 			<div class="form-group">
-				<label for="_rule">Rule:</label> <input th:value="${rule}"
-					type="text" class="form-control" id="_rule" name="rule" />
+				<label for="_rule_">Rule:</label> <input th:value="${rule}"
+					type="text" class="form-control" id="_rule_" name="rule" />
 			</div>
 			<div class="form-group">
-				<label for="_name">Name:</label> <input th:value="${name}"
-					type="text" class="form-control" id="_name" name="name" />
+				<label for="_name_">Name:</label> <input th:value="${name}"
+					type="text" class="form-control" id="_name_" name="name" />
 			</div>
 			<button type="submit" class="btn btn-success">
 				<span class="glyphicon glyphicon-search"></span> Search
@@ -42,6 +42,7 @@
 					<th>Rule</th>
 					<th>Name</th>
 					<th>Value</th>
+					<th>Remarks</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -52,6 +53,7 @@
 					<td th:text="${const.name}">Unknown</td>
 					<td th:text="${const.value}">0</td>
 					<td th:text="${const.remarks}" style="display: none;"></td>
+					<td th:text="${#strings.abbreviate(const.remarks, 20)}">Unknown</td>
 				</tr>
 			</tbody>
 		</table>
@@ -70,7 +72,9 @@
 					</h4>
 				</div>
 				<form action="/constant/edit" method="POST" role="form">
-					<input type="hidden" id="id" name="id" />
+					<input type="hidden" name="id" />
+					<input type="hidden" name="rule" />
+					<input type="hidden" name="name" />
 					<div class="modal-body">
 						<fieldset disabled="disabled">
 							<div class="form-group">
@@ -119,16 +123,16 @@
 	<script>
 		$(function() {
 			$('tbody tr').click(function() {
-				var id = $(this).children().eq(1).text();
+				var id = $(this).children().eq(0).text();
 				var rule = $(this).children().eq(2).text();
 				var name = $(this).children().eq(3).text();
 				var value = $(this).children().eq(4).text();
 				var remarks = $(this).children().eq(5).text();
-				$('#id').val(id);
-				$('#rule').val(rule);
-				$('#name').val(name);
-				$('#value').val(value);
-				$('#remarks').val(remarks);
+				$('#myModal input[name="id"]').val(id);
+				$('#myModal input[name="rule"]').val(rule);
+				$('#myModal input[name="name"]').val(name);
+				$('#myModal input[name="value"]').val(value);
+				$('#myModal textarea[name="remarks"]').val(remarks);
 				$('#myModal').modal();
 			});
 		});

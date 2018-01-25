@@ -21,13 +21,23 @@ public class PurchaseOrderController {
 	private PurchaseOrderService purchaseOrderService;
 
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
-	public String list() {
+	public String list(Model model) {
+		List<PurchaseOrder> pos = purchaseOrderService.findAll();
+		model.addAttribute("pos", pos);
 		return PO;
 	}
 	
 	@RequestMapping(path = "/upload", method = RequestMethod.POST)
-	public String upload(MultipartFile po, Model model) throws IOException {
-		List<PurchaseOrder> pos = purchaseOrderService.upload(po);
+	public String upload(MultipartFile poFile, Model model) throws IOException {
+		List<PurchaseOrder> pos = purchaseOrderService.upload(poFile);
+		model.addAttribute("pos", pos);
+		return PO;
+	}
+	
+	@RequestMapping(path = "/share", method = RequestMethod.GET)
+	public String share(Model model) {
+		purchaseOrderService.share();
+		List<PurchaseOrder> pos = purchaseOrderService.findAll();
 		model.addAttribute("pos", pos);
 		return PO;
 	}

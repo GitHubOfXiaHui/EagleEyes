@@ -3,8 +3,11 @@ package com.microsoft.china.eagleeyes.entity;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -51,7 +54,9 @@ public class PurchaseOrder extends BaseEntity {
 	// create date
 	private Date approvedDate;
 
-	@Column
+	@Lob
+	@Basic(fetch = FetchType.EAGER)
+	@Column(columnDefinition = "TEXT")
 	private String description;
 	
 	@Column(name = "owner_alias")

@@ -20,7 +20,14 @@ public class BaseControllerAdvice {
 		System.out.println(e.getMessage());
 		return FILE_ERROR;
 	}
+	
+	@ExceptionHandler(IllegalStateException.class)
+	public String formatError(IllegalStateException e) {
+		System.out.println(e.getMessage());
+		return FORMAT_ERROR;
+	}
 
 	private static final String INPUT_ERROR = "/error/input";
 	private static final String FILE_ERROR = "/error/file";
+	private static final String FORMAT_ERROR = "/error/format";
 }

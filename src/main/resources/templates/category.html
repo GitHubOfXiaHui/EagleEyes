@@ -20,14 +20,28 @@
 <body>
 	<nav th:include="nav::nav('category')" class="navbar navbar-inverse"></nav>
 	<div class="container">
-		<form class="form-inline" role="form">
+		<form class="form-inline" role="form" enctype="multipart/form-data"
+			method="POST" action="/category/upload">
 			<div class="form-group">
-				<label for="group1">Standard Group:</label> <input type="text"
-					class="form-control" id="group1" />
+				<label for="categoryFile">File:</label> <input type="file"
+					class="form-control" id="categoryFile" name="categoryFile" />
+			</div>
+			<button type="submit" class="btn btn-primary">
+				<span class="glyphicon glyphicon-cloud-upload"></span> Upload
+			</button>
+		</form>
+		<br />
+		<form class="form-inline" role="form" action="/category/search"
+			method="POST">
+			<div class="form-group">
+				<label for="_categoryGroup_">Standard Group:</label> <input
+					type="text" class="form-control" id="_categoryGroup_"
+					name="categoryGroup" th:value="${categoryGroup}" />
 			</div>
 			<div class="form-group">
-				<label for="category1">Standard Category:</label> <input type="text"
-					class="form-control" id="category1" />
+				<label for="_categoryName_">Standard Category:</label> <input
+					type="text" class="form-control" id="_categoryName_"
+					name="categoryName" th:value="${categoryName}" />
 			</div>
 			<button type="submit" class="btn btn-success">
 				<span class="glyphicon glyphicon-search"></span> Search
@@ -37,6 +51,7 @@
 		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
+					<th>#</th>
 					<th>Standard Group Name</th>
 					<th>Standard Category Name</th>
 					<th>Score</th>
@@ -44,60 +59,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr style="cursor: pointer;">
-					<td>Contractor Hub / Talent Source</td>
-					<td>Contractor Services (Procurement Only)</td>
-					<td>0</td>
-					<td>Contractor Services is a Microsoft Procurement...</td>
-				</tr>
-				<tr style="cursor: pointer;">
-					<td>Contractor Hub / Talent Source</td>
-					<td>Agency Temps</td>
-					<td>0</td>
-					<td>Work that is directly driven by a Microsoft...</td>
-				</tr>
-				<tr style="cursor: pointer;">
-					<td>Disbursements</td>
-					<td>Partners in Learning</td>
-					<td>30</td>
-					<td>Activities and projects associated with the Partners...</td>
-				</tr>
-				<tr style="cursor: pointer;">
-					<td>Disbursements</td>
-					<td>Academic Institutions</td>
-					<td>0</td>
-					<td>All levels of Academic Institutions are covered...</td>
-				</tr>
-				<tr style="cursor: pointer;">
-					<td>Disbursements</td>
-					<td>External Candidate Recruiting Expenses</td>
-					<td>0</td>
-					<td>Candidate expenses related to interviewing...</td>
-				</tr>
-				<tr style="cursor: pointer;">
-					<td>Disbursements</td>
-					<td>Contributions</td>
-					<td>0</td>
-					<td>Charitable donations to non-profit entities...</td>
-				</tr>
-				<tr style="cursor: pointer;">
-					<td>Disbursements</td>
-					<td>Rebates, Refunds &amp; Other Customer Payments</td>
-					<td>40</td>
-					<td>Disbursement of rebates, refunds, MIRF or other funds...</td>
-				</tr>
-				<tr style="cursor: pointer;">
-					<td>Disbursements</td>
-					<td>Customer, Partner &amp; Reseller Payments</td>
-					<td>40</td>
-					<td>Payments made to customers, partners, resellers,
-						advertisers or other entities...</td>
-				</tr>
-				<tr style="cursor: pointer;">
-					<td>Disbursements</td>
-					<td>Garnishments</td>
-					<td>0</td>
-					<td>Payments made to organizations...</td>
+				<tr th:each="ca, status: ${cas}" style="cursor: pointer;">
+					<td th:text="${ca.id}" style="display: none;"></td>
+					<td th:text="${status.count}">1</td>
+					<td th:text="${ca.categoryGroup}">Unknown</td>
+					<td th:text="${ca.categoryName}">Unknown</td>
+					<td th:text="${ca.score}">0</td>
+					<td th:text="${ca.definition}" style="display: none;"></td>
+					<td th:text="${#strings.abbreviate(ca.definition, 20)}">Unknown</td>
 				</tr>
 			</tbody>
 		</table>
@@ -116,29 +85,34 @@
 					</h4>
 				</div>
 				<form role="form">
+					<input type="hidden" name="id" /> <input type="hidden"
+						name="categoryGroup" /> <input type="hidden" name="categoryName" />
 					<div class="modal-body">
-						<div class="form-group">
-							<label for="group2">Standard Group</label> <input type="text"
-								class="form-control" id="group2"
-								placeholder="Enter Standard Group" />
-						</div>
-						<div class="form-group has-feedback">
-							<label for="category2">Standard Category</label> <span
-								class="glyphicon glyphicon-asterisk form-control-feedback"
-								style="color: red;"></span> <input type="text"
-								class="form-control" id="category2"
-								placeholder="Enter Standard Category" />
-						</div>
+						<fieldset disabled="disabled">
+							<div class="form-group">
+								<label for="categoryGroup">Standard Category Group</label> <input
+									type="text" class="form-control" id="categoryGroup"
+									name="categoryGroup" placeholder="Enter Standard Group" />
+							</div>
+							<div class="form-group has-feedback">
+								<label for="categoryName">Standard Category Name</label> <span
+									class="glyphicon glyphicon-asterisk form-control-feedback"
+									style="color: red;"></span> <input type="text"
+									class="form-control" id="categoryName" name="categoryName"
+									placeholder="Enter Standard Category" />
+							</div>
+						</fieldset>
 						<div class="form-group has-feedback">
 							<label for="score">Score</label> <span
 								class="glyphicon glyphicon-asterisk form-control-feedback"
 								style="color: red;"></span> <input type="text"
-								class="form-control" id="score" placeholder="Enter Score" />
+								class="form-control" id="score" name="score"
+								placeholder="Enter Score" />
 						</div>
 						<div class="form-group">
-							<label for="definition">Definition</label> <input type="text"
-								class="form-control" id="definition"
-								placeholder="Enter Standard Category Definition" />
+							<label for="definition">Definition</label>
+							<textarea class="form-control" id="definition" name="definition"
+								rows="5" cols="30"></textarea>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -163,14 +137,16 @@
 	<script>
 		$(function() {
 			$('tbody tr').click(function() {
-				var group = $(this).children().eq(0).text();
-				var category = $(this).children().eq(1).text();
-				var score = $(this).children().eq(2).text();
-				var definition = $(this).children().eq(3).text();
-				$('#group2').val(group);
-				$('#category2').val(category);
-				$('#score').val(score);
-				$('#definition').val(definition);
+				var id = $(this).children().eq(0).text();
+				var categoryGroup = $(this).children().eq(2).text();
+				var categoryName = $(this).children().eq(3).text();
+				var score = $(this).children().eq(4).text();
+				var definition = $(this).children().eq(5).text();
+				$('#myModal input[name="id"]').val(id);
+				$('#myModal input[name="categoryGroup"]').val(categoryGroup);
+				$('#myModal input[name="categoryName"]').val(categoryName);
+				$('#myModal input[name="score"]').val(score);
+				$('#myModal textarea[name="definition"').val(definition);
 				$('#myModal').modal();
 			});
 		});

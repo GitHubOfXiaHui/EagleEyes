@@ -1,12 +1,14 @@
 package com.microsoft.china.eagleeyes.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
@@ -16,11 +18,13 @@ public abstract class BaseEntity implements Serializable {
 	@Id @GeneratedValue
 	protected Integer id;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_time")
-	protected Timestamp createTime;
+	protected Date createTime;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "last_modified")
-	protected Timestamp lastModified;
+	protected Date lastModified;
 
 	public Integer getId() {
 		return id;
@@ -30,19 +34,19 @@ public abstract class BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	public Timestamp getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public Timestamp getLastModified() {
+	public Date getLastModified() {
 		return lastModified;
 	}
 
-	public void setLastModified(Timestamp lastModified) {
+	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
 	}
 

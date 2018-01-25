@@ -5,13 +5,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.microsoft.china.eagleeyes.entity.PurchaseOrder;
+import com.microsoft.china.eagleeyes.entity.Violation;
 
-public interface PurchaseOrderDao extends JpaRepository<PurchaseOrder, Integer> {
+public interface ViolationDao extends JpaRepository<Violation, Integer> {
 
 	@Transactional
 	@Modifying
-	@Query(value = "truncate table purchase_order;", nativeQuery = true)
+	@Query(value = "truncate table violation;", nativeQuery = true)
 	void truncate();
 
 }
