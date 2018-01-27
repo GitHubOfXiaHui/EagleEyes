@@ -14,7 +14,7 @@ import com.microsoft.china.eagleeyes.service.ConstantService;
 @Controller
 @RequestMapping("/constant")
 public class ConstantController {
-	
+
 	@Autowired
 	private ConstantService constantService;
 
@@ -24,7 +24,7 @@ public class ConstantController {
 		model.addAttribute("constants", constants);
 		return CONSTANT;
 	}
-	
+
 	@RequestMapping(path = "/search", method = RequestMethod.POST)
 	public String search(String rule, String name, Model model) {
 		List<Constant> constants = constantService.find(rule, name);
@@ -33,7 +33,7 @@ public class ConstantController {
 		model.addAttribute("constants", constants);
 		return CONSTANT;
 	}
-	
+
 	@RequestMapping(path = "/edit", method = RequestMethod.POST)
 	public String edit(Constant constant, Model model) {
 		constantService.update(constant);
@@ -41,6 +41,6 @@ public class ConstantController {
 		model.addAttribute("constants", constants);
 		return CONSTANT;
 	}
-	
+
 	private static final String CONSTANT = "/constant";
 }

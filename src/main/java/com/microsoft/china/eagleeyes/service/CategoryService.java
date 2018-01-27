@@ -15,4 +15,6 @@ public interface CategoryService {
 
 	List<Category> find(String categoryGroup, String categoryName);
 
+	void update(Category category);
+
 }

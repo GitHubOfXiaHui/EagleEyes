@@ -16,7 +16,7 @@ import com.microsoft.china.eagleeyes.service.ViolationService;
 @Controller
 @RequestMapping("/violation")
 public class ViolationController {
-	
+
 	@Autowired
 	private ViolationService violationService;
 
@@ -26,13 +26,13 @@ public class ViolationController {
 		model.addAttribute("vios", violations);
 		return VIOLATION;
 	}
-	
+
 	@RequestMapping(path = "/upload", method = RequestMethod.POST)
 	public String upload(MultipartFile violationFile, Model model) throws IOException {
 		List<Violation> violations = violationService.upload(violationFile);
 		model.addAttribute("vios", violations);
 		return VIOLATION;
 	}
-	
+
 	private static final String VIOLATION = "/violation";
 }

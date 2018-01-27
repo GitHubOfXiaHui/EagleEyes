@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
 			category.setDefinition(Optional.ofNullable(row.getCell(head.get("Standard Category Definition"))).map(Cell::getStringCellValue).orElse(null));
 			body.add(category);
 		}
-		categoryDao.truncate();
+		categoryDao.deleteAll();
 		return categoryDao.save(body);
 	}
 
@@ -68,6 +68,12 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryGroup = "%" + categoryGroup + "%";
 		categoryName = "%" + categoryName + "%";
 		return categoryDao.findByCategoryGroupLikeAndCategoryNameLike(categoryGroup, categoryName);
+	}
+
+	@Transactional
+	@Override
+	public void update(Category category) {
+		categoryDao.save(category);
 	}
 
 }

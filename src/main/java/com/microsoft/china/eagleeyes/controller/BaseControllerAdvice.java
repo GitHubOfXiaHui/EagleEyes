@@ -2,6 +2,7 @@ package com.microsoft.china.eagleeyes.controller;
 
 import java.io.IOException;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,8 +22,8 @@ public class BaseControllerAdvice {
 		return FILE_ERROR;
 	}
 	
-	@ExceptionHandler(IllegalStateException.class)
-	public String formatError(IllegalStateException e) {
+	@ExceptionHandler({IllegalStateException.class, DataIntegrityViolationException.class})
+	public String formatError(RuntimeException e) {
 		System.out.println(e.getMessage());
 		return FORMAT_ERROR;
 	}

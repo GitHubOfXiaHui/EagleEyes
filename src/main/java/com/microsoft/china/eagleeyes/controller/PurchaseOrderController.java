@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microsoft.china.eagleeyes.entity.PurchaseOrder;
@@ -34,13 +35,19 @@ public class PurchaseOrderController {
 		return PO;
 	}
 	
-	@RequestMapping(path = "/share", method = RequestMethod.GET)
+	@RequestMapping(path = "/calculate", method = RequestMethod.GET)
 	public String share(Model model) {
-		purchaseOrderService.share();
-		List<PurchaseOrder> pos = purchaseOrderService.findAll();
+		List<PurchaseOrder> pos = purchaseOrderService.calculate();
 		model.addAttribute("pos", pos);
 		return PO;
 	}
 	
-	private static final String PO = "/po"; 
+	@RequestMapping(path = "/progress", method = RequestMethod.GET)
+	public @ResponseBody int progress() {
+		int progress = purchaseOrderService.getProgress();
+		System.out.println(progress);
+		return progress;
+	}
+	
+	private static final String PO = "/po";
 }

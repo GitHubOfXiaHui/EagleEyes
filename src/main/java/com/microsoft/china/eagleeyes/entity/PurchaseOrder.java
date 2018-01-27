@@ -20,8 +20,8 @@ public class PurchaseOrder extends BaseEntity {
 
 	private static final long serialVersionUID = -7152265661681650925L;
 	
-	@Column(unique = true, nullable = false)
-	private String number;
+	@Column(name = "po_number", unique = true, nullable = false)
+	private String poNumber;
 	
 	@Column
 	private Double amount;
@@ -47,7 +47,7 @@ public class PurchaseOrder extends BaseEntity {
 	private String categoryGroup;
 	
 	@Column(name = "company_code")
-	private Double companyCode;
+	private String companyCode;
 	
 	@Column(name = "approved_date")
 	@Temporal(TemporalType.DATE)
@@ -74,7 +74,7 @@ public class PurchaseOrder extends BaseEntity {
 	
 	
 	@Column(name = "supplier_number")
-	private Double supplierNumber;
+	private String supplierNumber;
 	
 	
 	@Column(name = "supplier_name")
@@ -143,64 +143,64 @@ public class PurchaseOrder extends BaseEntity {
 	@Type(type = "yes_no")
 	private Boolean poSplitFlag;
 	
-	@Column(name = "rick_flag")
+	@Column(name = "risk_flag")
 	@Type(type = "yes_no")
-	private Boolean rickFlag;
+	private Boolean riskFlag;
 	
-	@Column(name = "category_rick")
-	private Integer categoryRick;
+	@Column(name = "category_risk")
+	private Integer categoryRisk;
 	
 	@Column(name = "create_date_diff")
 	private Integer createDateDiff;
 	
-	@Column(name = "create_date_rick")
-	private Integer createDateRick;
+	@Column(name = "create_date_risk")
+	private Integer createDateRisk;
 	
 	@Column(name = "payment_date_diff")
 	private Integer paymentDateDiff;
 	
-	@Column(name = "payment_date_rick")
-	private Integer paymentDateRick;
+	@Column(name = "payment_date_risk")
+	private Integer paymentDateRisk;
 	
 	@Column(name = "atf1_diff")
 	private Integer atf1Diff;
 	
-	@Column(name = "atf1_rick")
-	private Integer atf1Rick;
+	@Column(name = "atf1_risk")
+	private Integer atf1Risk;
 	
 	@Column(name = "atf2_diff")
 	private Integer atf2Diff;
 	
-	@Column(name = "atf2_rick")
-	private Integer atf2Rick;
+	@Column(name = "atf2_risk")
+	private Integer atf2Risk;
 	
-	@Column(name = "owner_fail_rick")
-	private Integer ownerFailRick;
+	@Column(name = "owner_fail_risk")
+	private Integer ownerFailRisk;
 	
-	@Column(name = "submitter_fail_rick")
-	private Integer submitterFailRick;
+	@Column(name = "submitter_fail_risk")
+	private Integer submitterFailRisk;
 	
-	@Column(name = "vendor_fail_rick")
-	private Integer vendorFailRick;
+	@Column(name = "vendor_fail_risk")
+	private Integer vendorFailRisk;
 	
-	@Column(name = "owner_new_rick")
-	private Integer ownerNewRick;
+	@Column(name = "owner_new_risk")
+	private Integer ownerNewRisk;
 	
-	@Column(name = "submitter_new_rick")
-	private Integer submitterNewRick;
+	@Column(name = "submitter_new_risk")
+	private Integer submitterNewRisk;
 	
-	@Column(name = "vendor_new_rick")
-	private Integer vendorNewRick;
+	@Column(name = "vendor_new_risk")
+	private Integer vendorNewRisk;
 	
-	@Column(name = "rick_score")
-	private Integer rickScore;
+	@Column(name = "risk_score")
+	private Integer riskScore;
 
-	public String getNumber() {
-		return number;
+	public String getPoNumber() {
+		return poNumber;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setPoNumber(String poNumber) {
+		this.poNumber = poNumber;
 	}
 
 	public Double getAmount() {
@@ -259,11 +259,11 @@ public class PurchaseOrder extends BaseEntity {
 		this.categoryGroup = categoryGroup;
 	}
 
-	public Double getCompanyCode() {
+	public String getCompanyCode() {
 		return companyCode;
 	}
 
-	public void setCompanyCode(Double companyCode) {
+	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
 	}
 
@@ -315,11 +315,11 @@ public class PurchaseOrder extends BaseEntity {
 		this.submitterName = submitterName;
 	}
 
-	public Double getSupplierNumber() {
+	public String getSupplierNumber() {
 		return supplierNumber;
 	}
 
-	public void setSupplierNumber(Double supplierNumber) {
+	public void setSupplierNumber(String supplierNumber) {
 		this.supplierNumber = supplierNumber;
 	}
 
@@ -483,20 +483,20 @@ public class PurchaseOrder extends BaseEntity {
 		this.poSplitFlag = poSplitFlag;
 	}
 
-	public Boolean getRickFlag() {
-		return rickFlag;
+	public Boolean getRiskFlag() {
+		return riskFlag;
 	}
 
-	public void setRickFlag(Boolean rickFlag) {
-		this.rickFlag = rickFlag;
+	public void setRiskFlag(Boolean riskFlag) {
+		this.riskFlag = riskFlag;
 	}
 
-	public Integer getCategoryRick() {
-		return categoryRick;
+	public Integer getCategoryRisk() {
+		return categoryRisk;
 	}
 
-	public void setCategoryRick(Integer categoryRick) {
-		this.categoryRick = categoryRick;
+	public void setCategoryRisk(Integer categoryRisk) {
+		this.categoryRisk = categoryRisk;
 	}
 
 	public Integer getCreateDateDiff() {
@@ -507,12 +507,12 @@ public class PurchaseOrder extends BaseEntity {
 		this.createDateDiff = createDateDiff;
 	}
 
-	public Integer getCreateDateRick() {
-		return createDateRick;
+	public Integer getCreateDateRisk() {
+		return createDateRisk;
 	}
 
-	public void setCreateDateRick(Integer createDateRick) {
-		this.createDateRick = createDateRick;
+	public void setCreateDateRisk(Integer createDateRisk) {
+		this.createDateRisk = createDateRisk;
 	}
 
 	public Integer getPaymentDateDiff() {
@@ -523,12 +523,12 @@ public class PurchaseOrder extends BaseEntity {
 		this.paymentDateDiff = paymentDateDiff;
 	}
 
-	public Integer getPaymentDateRick() {
-		return paymentDateRick;
+	public Integer getPaymentDateRisk() {
+		return paymentDateRisk;
 	}
 
-	public void setPaymentDateRick(Integer paymentDateRick) {
-		this.paymentDateRick = paymentDateRick;
+	public void setPaymentDateRisk(Integer paymentDateRisk) {
+		this.paymentDateRisk = paymentDateRisk;
 	}
 
 	public Integer getAtf1Diff() {
@@ -539,12 +539,12 @@ public class PurchaseOrder extends BaseEntity {
 		this.atf1Diff = atf1Diff;
 	}
 
-	public Integer getAtf1Rick() {
-		return atf1Rick;
+	public Integer getAtf1Risk() {
+		return atf1Risk;
 	}
 
-	public void setAtf1Rick(Integer atf1Rick) {
-		this.atf1Rick = atf1Rick;
+	public void setAtf1Risk(Integer atf1Risk) {
+		this.atf1Risk = atf1Risk;
 	}
 
 	public Integer getAtf2Diff() {
@@ -555,73 +555,73 @@ public class PurchaseOrder extends BaseEntity {
 		this.atf2Diff = atf2Diff;
 	}
 
-	public Integer getAtf2Rick() {
-		return atf2Rick;
+	public Integer getAtf2Risk() {
+		return atf2Risk;
 	}
 
-	public void setAtf2Rick(Integer atf2Rick) {
-		this.atf2Rick = atf2Rick;
+	public void setAtf2Risk(Integer atf2Risk) {
+		this.atf2Risk = atf2Risk;
 	}
 
-	public Integer getOwnerFailRick() {
-		return ownerFailRick;
+	public Integer getOwnerFailRisk() {
+		return ownerFailRisk;
 	}
 
-	public void setOwnerFailRick(Integer ownerFailRick) {
-		this.ownerFailRick = ownerFailRick;
+	public void setOwnerFailRisk(Integer ownerFailRisk) {
+		this.ownerFailRisk = ownerFailRisk;
 	}
 
-	public Integer getSubmitterFailRick() {
-		return submitterFailRick;
+	public Integer getSubmitterFailRisk() {
+		return submitterFailRisk;
 	}
 
-	public void setSubmitterFailRick(Integer submitterFailRick) {
-		this.submitterFailRick = submitterFailRick;
+	public void setSubmitterFailRisk(Integer submitterFailRisk) {
+		this.submitterFailRisk = submitterFailRisk;
 	}
 
-	public Integer getVendorFailRick() {
-		return vendorFailRick;
+	public Integer getVendorFailRisk() {
+		return vendorFailRisk;
 	}
 
-	public void setVendorFailRick(Integer vendorFailRick) {
-		this.vendorFailRick = vendorFailRick;
+	public void setVendorFailRisk(Integer vendorFailRisk) {
+		this.vendorFailRisk = vendorFailRisk;
 	}
 
-	public Integer getOwnerNewRick() {
-		return ownerNewRick;
+	public Integer getOwnerNewRisk() {
+		return ownerNewRisk;
 	}
 
-	public void setOwnerNewRick(Integer ownerNewRick) {
-		this.ownerNewRick = ownerNewRick;
+	public void setOwnerNewRisk(Integer ownerNewRisk) {
+		this.ownerNewRisk = ownerNewRisk;
 	}
 
-	public Integer getSubmitterNewRick() {
-		return submitterNewRick;
+	public Integer getSubmitterNewRisk() {
+		return submitterNewRisk;
 	}
 
-	public void setSubmitterNewRick(Integer submitterNewRick) {
-		this.submitterNewRick = submitterNewRick;
+	public void setSubmitterNewRisk(Integer submitterNewRisk) {
+		this.submitterNewRisk = submitterNewRisk;
 	}
 
-	public Integer getVendorNewRick() {
-		return vendorNewRick;
+	public Integer getVendorNewRisk() {
+		return vendorNewRisk;
 	}
 
-	public void setVendorNewRick(Integer vendorNewRick) {
-		this.vendorNewRick = vendorNewRick;
+	public void setVendorNewRisk(Integer vendorNewRisk) {
+		this.vendorNewRisk = vendorNewRisk;
 	}
 
-	public Integer getRickScore() {
-		return rickScore;
+	public Integer getRiskScore() {
+		return riskScore;
 	}
 
-	public void setRickScore(Integer rickScore) {
-		this.rickScore = rickScore;
+	public void setRiskScore(Integer riskScore) {
+		this.riskScore = riskScore;
 	}
 
 	@Override
 	public String toString() {
-		return "PurchaseOrder [number=" + number + ", amount=" + amount + ", invoiceAmount=" + invoiceAmount
+		return "PurchaseOrder [poNumber=" + poNumber + ", amount=" + amount + ", invoiceAmount=" + invoiceAmount
 				+ ", invoiceDateFirst=" + invoiceDateFirst + ", invoiceDateLast=" + invoiceDateLast + ", count=" + count
 				+ ", category=" + category + ", categoryGroup=" + categoryGroup + ", companyCode=" + companyCode
 				+ ", approvedDate=" + approvedDate + ", description=" + description + ", ownerAlias=" + ownerAlias
@@ -633,13 +633,13 @@ public class PurchaseOrder extends BaseEntity {
 				+ poFiscalQuarter + ", poMonth=" + poMonth + ", poIndex=" + poIndex + ", invFiscalYear=" + invFiscalYear
 				+ ", invFiscalQuarter=" + invFiscalQuarter + ", invMonth=" + invMonth + ", atf1Flag=" + atf1Flag
 				+ ", atf2Flag=" + atf2Flag + ", amountFlag=" + amountFlag + ", poSplitFlag=" + poSplitFlag
-				+ ", rickFlag=" + rickFlag + ", categoryRick=" + categoryRick + ", createDateDiff=" + createDateDiff
-				+ ", createDateRick=" + createDateRick + ", paymentDateDiff=" + paymentDateDiff + ", paymentDateRick="
-				+ paymentDateRick + ", atf1Diff=" + atf1Diff + ", atf1Rick=" + atf1Rick + ", atf2Diff=" + atf2Diff
-				+ ", atf2Rick=" + atf2Rick + ", ownerFailRick=" + ownerFailRick + ", submitterFailRick="
-				+ submitterFailRick + ", vendorFailRick=" + vendorFailRick + ", ownerNewRick=" + ownerNewRick
-				+ ", submitterNewRick=" + submitterNewRick + ", vendorNewRick=" + vendorNewRick + ", rickScore="
-				+ rickScore + ", id=" + id + ", createTime=" + createTime + ", lastModified=" + lastModified + "]";
+				+ ", riskFlag=" + riskFlag + ", categoryRisk=" + categoryRisk + ", createDateDiff=" + createDateDiff
+				+ ", createDateRisk=" + createDateRisk + ", paymentDateDiff=" + paymentDateDiff + ", paymentDateRisk="
+				+ paymentDateRisk + ", atf1Diff=" + atf1Diff + ", atf1Risk=" + atf1Risk + ", atf2Diff=" + atf2Diff
+				+ ", atf2Risk=" + atf2Risk + ", ownerFailRisk=" + ownerFailRisk + ", submitterFailRisk="
+				+ submitterFailRisk + ", vendorFailRisk=" + vendorFailRisk + ", ownerNewRisk=" + ownerNewRisk
+				+ ", submitterNewRisk=" + submitterNewRisk + ", vendorNewRisk=" + vendorNewRisk + ", riskScore="
+				+ riskScore + ", id=" + id + ", createTime=" + createTime + ", lastModified=" + lastModified + "]";
 	}
 	
 }

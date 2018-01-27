@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.microsoft.china.eagleeyes.entity.Violation;
 
 public interface ViolationDao extends JpaRepository<Violation, Integer> {
-
+	
 	@Transactional
 	@Modifying
-	@Query(value = "truncate table violation;", nativeQuery = true)
-	void truncate();
+	@Query("delete from Violation")
+	void deleteAll();
 
 }

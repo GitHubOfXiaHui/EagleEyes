@@ -1,0 +1,17 @@
+.masking {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	padding-top: 15%;
+	background-color: rgba(0, 0, 0, 0.9);
+	z-index: 1;
+	display: none;
+}
+
+.progress {
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+}

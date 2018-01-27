@@ -13,6 +13,8 @@ public interface PurchaseOrderService {
 
 	List<PurchaseOrder> findAll();
 
-	void share();
+	List<PurchaseOrder> calculate();
+	
+	int getProgress();
 
 }

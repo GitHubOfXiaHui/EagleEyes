@@ -16,7 +16,7 @@ import com.microsoft.china.eagleeyes.service.CategoryService;
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
-	
+
 	@Autowired
 	private CategoryService categoryService;
 
@@ -26,14 +26,14 @@ public class CategoryController {
 		model.addAttribute("cas", categories);
 		return CATEGORY;
 	}
-	
+
 	@RequestMapping(path = "/upload", method = RequestMethod.POST)
 	public String upload(MultipartFile categoryFile, Model model) throws IOException {
 		List<Category> categories = categoryService.upload(categoryFile);
 		model.addAttribute("cas", categories);
 		return CATEGORY;
 	}
-	
+
 	@RequestMapping(path = "/search", method = RequestMethod.POST)
 	public String search(String categoryGroup, String categoryName, Model model) {
 		List<Category> categories = categoryService.find(categoryGroup, categoryName);
@@ -43,5 +43,13 @@ public class CategoryController {
 		return CATEGORY;
 	}
 	
+	@RequestMapping(path = "edit", method = RequestMethod.POST)
+	public String edit(Category category, Model model) {
+		categoryService.update(category);
+		List<Category> categories = categoryService.findAll();
+		model.addAttribute("cas", categories);
+		return CATEGORY;
+	}
+
 	private static final String CATEGORY = "/category";
 }

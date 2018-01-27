@@ -7,11 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.microsoft.china.eagleeyes.entity.PurchaseOrder;
 
-public interface PurchaseOrderDao extends JpaRepository<PurchaseOrder, Integer> {
-
+public interface PurchaseOrderDao extends JpaRepository<PurchaseOrder, Integer>, PurchaseOrderDaoPlus {
+	
 	@Transactional
 	@Modifying
-	@Query(value = "truncate table purchase_order;", nativeQuery = true)
-	void truncate();
+	@Query("delete from PurchaseOrder")
+	void deleteAll();
 
 }

@@ -73,21 +73,17 @@
 				</div>
 				<form action="/constant/edit" method="POST" role="form">
 					<input type="hidden" name="id" />
-					<input type="hidden" name="rule" />
-					<input type="hidden" name="name" />
 					<div class="modal-body">
-						<fieldset disabled="disabled">
-							<div class="form-group">
-								<label for="rule">Rule</label> <input type="text"
-									class="form-control" id="rule" name="rule"
-									placeholder="Enter rule" />
-							</div>
-							<div class="form-group has-feedback">
-								<label for="name">Name</label> <input type="text"
-									class="form-control" id="name" name="name"
-									placeholder="Enter name" />
-							</div>
-						</fieldset>
+						<div class="form-group">
+							<label for="rule">Rule</label> <input type="text"
+								class="form-control" id="rule" name="rule"
+								placeholder="Enter rule" readonly="readonly" />
+						</div>
+						<div class="form-group">
+							<label for="name">Name</label> <input type="text"
+								class="form-control" id="name" name="name"
+								placeholder="Enter name" readonly="readonly" />
+						</div>
 						<div class="form-group has-feedback">
 							<label for="value">Value</label> <span
 								class="glyphicon glyphicon-asterisk form-control-feedback"

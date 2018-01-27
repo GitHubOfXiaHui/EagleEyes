@@ -32,7 +32,7 @@ public class Violation extends BaseEntity {
 	private String vendorName;
 	
 	@Column(name = "vendor_id")
-	private Double vendorId;
+	private String vendorId;
 	
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
@@ -90,11 +90,11 @@ public class Violation extends BaseEntity {
 		this.vendorName = vendorName;
 	}
 
-	public Double getVendorId() {
+	public String getVendorId() {
 		return vendorId;
 	}
 
-	public void setVendorId(Double vendorId) {
+	public void setVendorId(String vendorId) {
 		this.vendorId = vendorId;
 	}
 

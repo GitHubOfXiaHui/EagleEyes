@@ -11,11 +11,11 @@ import com.microsoft.china.eagleeyes.entity.Category;
 
 public interface CategoryDao extends JpaRepository<Category, Integer> {
 
+	List<Category> findByCategoryGroupLikeAndCategoryNameLike(String categoryGroup, String categoryName);
+	
 	@Transactional
 	@Modifying
-	@Query(value = "truncate table category;", nativeQuery = true)
-	void truncate();
-
-	List<Category> findByCategoryGroupLikeAndCategoryNameLike(String categoryGroup, String categoryName);
+	@Query("delete from Category")
+	void deleteAll();
 	
 }
