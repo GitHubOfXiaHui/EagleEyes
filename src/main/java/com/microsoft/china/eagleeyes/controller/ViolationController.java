@@ -34,5 +34,5 @@ public class ViolationController {
 		return VIOLATION;
 	}
 
-	private static final String VIOLATION = "/violation";
+	private static final String VIOLATION = "violation";
 }

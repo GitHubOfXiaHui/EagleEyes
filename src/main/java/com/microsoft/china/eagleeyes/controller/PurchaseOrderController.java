@@ -49,5 +49,5 @@ public class PurchaseOrderController {
 		return progress;
 	}
 	
-	private static final String PO = "/po";
+	private static final String PO = "po";
 }

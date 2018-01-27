@@ -51,5 +51,5 @@ public class CategoryController {
 		return CATEGORY;
 	}
 
-	private static final String CATEGORY = "/category";
+	private static final String CATEGORY = "category";
 }

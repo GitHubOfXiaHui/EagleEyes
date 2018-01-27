@@ -42,5 +42,5 @@ public class ConstantController {
 		return CONSTANT;
 	}
 
-	private static final String CONSTANT = "/constant";
+	private static final String CONSTANT = "constant";
 }
