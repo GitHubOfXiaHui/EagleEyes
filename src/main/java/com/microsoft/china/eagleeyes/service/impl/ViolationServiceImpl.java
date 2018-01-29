@@ -31,7 +31,7 @@ public class ViolationServiceImpl implements ViolationService {
 	public List<Violation> upload(MultipartFile violationFile) throws IOException {
 		try (Workbook wb = ExcelUtil.createWorkbook(violationFile.getInputStream(),
 				violationFile.getOriginalFilename())) {
-			Sheet sheet = wb.getSheet("POViolationList");
+			Sheet sheet = wb.getSheet("Sheet1");
 			Map<String, Integer> head = ExcelUtil.getHead(sheet.getRow(sheet.getFirstRowNum()));
 			List<Violation> body = getBody(sheet, head);
 			return body;

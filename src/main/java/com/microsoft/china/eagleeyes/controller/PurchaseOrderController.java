@@ -32,6 +32,7 @@ public class PurchaseOrderController {
 	public String upload(MultipartFile poFile, Model model) throws IOException {
 		List<PurchaseOrder> pos = purchaseOrderService.upload(poFile);
 		model.addAttribute("pos", pos);
+		model.addAttribute("uploaded", true);
 		return PO;
 	}
 	
@@ -39,6 +40,7 @@ public class PurchaseOrderController {
 	public String share(Model model) {
 		List<PurchaseOrder> pos = purchaseOrderService.calculate();
 		model.addAttribute("pos", pos);
+		model.addAttribute("calculated", true);
 		return PO;
 	}
 	

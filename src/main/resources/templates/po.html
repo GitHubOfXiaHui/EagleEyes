@@ -30,6 +30,14 @@
 	</div>
 	<nav th:include="nav::nav('po')" class="navbar navbar-inverse"></nav>
 	<div class="container">
+		<div class="alert alert-success" th:if="${uploaded}">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>成功!</strong> 成功上传采购订单文件.
+		</div>
+		<div class="alert alert-success" th:if="${calculated}">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>成功!</strong> 成功计算采购订单风险.
+		</div>
 		<form class="form-inline" role="form" enctype="multipart/form-data"
 			method="POST" action="/po/upload">
 			<div class="form-group">
@@ -47,25 +55,132 @@
 				Power BI</a>
 		</form>
 		<br />
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>PO Number</th>
-					<th>POAmountTotal RMB</th>
-					<th>InvoiceDateFirst</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="po, status: ${pos}" style="cursor: pointer;">
-					<td th:text="${status.count}">1</td>
-					<td th:text="${po.poNumber}">Unknown</td>
-					<td th:text="${po.amount}">Unknown</td>
-					<td
-						th:text="${po.invoiceDateFirst != null} ? ${#dates.format(po.invoiceDateFirst, 'M/d/yyyy')}">Unknown</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="table-responsive"><!-- style="width: 100%; height: 600px; overflow: scroll;" -->
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>PO Number</th>
+						<th>POAmountTotal RMB</th>
+						<th>InvoiceAmountTotal RMB</th>
+						<th>InvoiceDateFirst</th>
+						<th>InvoiceDateLast</th>
+						<th>PO.Count</th>
+						<th>PO.Category</th>
+						<th>PO.Category Group</th>
+						<th>Company Code</th>
+						<th>PO.Created Date_ApprovedDate</th>
+						<th>PO.Description</th>
+						<th>PO.Owner Alias</th>
+						<th>PO.Owner Name</th>
+						<th>PO.Submitted By Alias</th>
+						<th>PO.Submitted By Name</th>
+						<th>PO.Supplier Number</th>
+						<th>PO.Supplier Name</th>
+						<th>PO.Start Date</th>
+						<th>PO.Approver.Alias</th>
+						<th>PO.Appover Name</th>
+						<th>PO.Approver Type</th>
+						<th>SAPPOStatus</th>
+						<th>PO Owner.Region</th>
+						<th>PO Owner.Segment</th>
+						<th>PO Owner.GSMO</th>
+						<th>PO.Report Fiscal Year</th>
+						<th>PO.Report Quarter</th>
+						<th>PO.Report Month</th>
+						<th>PO.Index</th>
+						<th>INV.Report Fiscal Year</th>
+						<th>INV.Report Quarter</th>
+						<th>INV.Report Month</th>
+						<th>AfterTheFact_1Flag</th>
+						<th>AfterTheFact_2Flag</th>
+						<th>InvoicePOAmountFlag</th>
+						<th>SplitPOFlag</th>
+						<th>RiskFlag</th>
+						<th>POCategory Risk</th>
+						<th>POCreateDate Diff</th>
+						<th>POCreateDate Risk</th>
+						<th>POPaymentDate Diff</th>
+						<th>POPaymentDate Risk</th>
+						<th>AfterTheFact_risk1 Diff</th>
+						<th>AfterTheFact_risk1 Risk</th>
+						<th>AfterTheFact_risk2 Diff</th>
+						<th>AfterTheFact_risk2 Risk</th>
+						<th>POOwner_Fail Risk</th>
+						<th>POSubmittor_Fail Risk</th>
+						<th>Vendor_Fail Risk</th>
+						<th>POOwner_New Risk</th>
+						<th>POSubmittor_New Risk</th>
+						<th>Vendor_New Risk</th>
+						<th>RiskScore</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="po, status: ${pos}">
+						<td th:text="${status.count}">1</td>
+						<td th:text="${po.poNumber}">Unknown</td>
+						<td
+							th:text="${po.amount != null} ? ${#numbers.formatDecimal(po.amount, 1, 2)}">Unknown</td>
+						<td
+							th:text="${po.invoiceAmount != null} ? ${#numbers.formatDecimal(po.invoiceAmount, 1, 2)}">Unknown</td>
+						<td
+							th:text="${po.invoiceDateFirst != null} ? ${#dates.format(po.invoiceDateFirst, 'M/d/yyyy')}">Unknown</td>
+						<td
+							th:text="${po.invoiceDateLast != null} ? ${#dates.format(po.invoiceDateLast, 'M/d/yyyy')}">Unknown</td>
+						<td th:text="${po.count}">Unknown</td>
+						<td th:text="${po.category}">Unknown</td>
+						<td th:text="${po.categoryGroup}">Unknown</td>
+						<td th:text="${po.companyCode}">Unknown</td>
+						<td
+							th:text="${po.approvedDate != null} ? ${#dates.format(po.approvedDate, 'M/d/yyyy')}">Unknown</td>
+						<td th:text="${po.description != null} ? ${#strings.abbreviate(po.description, 20)}">Unknown</td>
+						<td th:text="${po.ownerAlias}">Unknown</td>
+						<td th:text="${po.ownerName}">Unknown</td>
+						<td th:text="${po.submitterAlias}">Unknown</td>
+						<td th:text="${po.submitterName}">Unknown</td>
+						<td th:text="${po.supplierNumber}">Unknown</td>
+						<td th:text="${po.supplierName}">Unknown</td>
+						<td
+							th:text="${po.startDate != null} ? ${#dates.format(po.startDate, 'M/d/yyyy')}">Unknown</td>
+						<td th:text="${po.approverAlias}">Unknown</td>
+						<td th:text="${po.approverName}">Unknown</td>
+						<td th:text="${po.approverType}">Unknown</td>
+						<td th:text="${po.status}">Unknown</td>
+						<td th:text="${po.ownerRegion}">Unknown</td>
+						<td th:text="${po.ownerSegment}">Unknown</td>
+						<td th:text="${po.ownerGSMO}">Unknown</td>
+						<td th:text="${po.poFiscalYear}">Unknown</td>
+						<td th:text="${po.poFiscalQuarter}">Unknown</td>
+						<td th:text="${po.poMonth}">Unknown</td>
+						<td th:text="${po.poIndex}">Unknown</td>
+						<td th:text="${po.invFiscalYear}">Unknown</td>
+						<td th:text="${po.invFiscalQuarter}">Unknown</td>
+						<td th:text="${po.invMonth}">Unknown</td>
+						<td th:text="${po.atf1Flag == null} ? '' : (${po.atf1Flag} ? 'Y' : 'N')">Unknown</td>
+						<td th:text="${po.atf2Flag == null} ? '' : (${po.atf2Flag} ? 'Y' : 'N')">Unknown</td>
+						<td th:text="${po.amountFlag == null} ? '' : (${po.amountFlag} ? 'Y' : 'N')">Unknown</td>
+						<td th:text="${po.poSplitFlag == null} ? '' : (${po.poSplitFlag} ? 'Y' : 'N')">Unknown</td>
+						<td th:text="${po.riskFlag == null} ? '' : (${po.riskFlag} ? 'Y' : 'N')">Unknown</td>
+						<td th:text="${po.categoryRisk}">Unknown</td>
+						<td th:text="${po.createDateDiff}">Unknown</td>
+						<td th:text="${po.createDateRisk}">Unknown</td>
+						<td th:text="${po.paymentDateDiff}">Unknown</td>
+						<td th:text="${po.paymentDateRisk}">Unknown</td>
+						<td th:text="${po.atf1Diff}">Unknown</td>
+						<td th:text="${po.atf1Risk}">Unknown</td>
+						<td th:text="${po.atf2Diff}">Unknown</td>
+						<td th:text="${po.atf2Risk}">Unknown</td>
+						<td th:text="${po.ownerFailRisk}">Unknown</td>
+						<td th:text="${po.submitterFailRisk}">Unknown</td>
+						<td th:text="${po.vendorFailRisk}">Unknown</td>
+						<td th:text="${po.ownerNewRisk}">Unknown</td>
+						<td th:text="${po.submitterNewRisk}">Unknown</td>
+						<td th:text="${po.vendorNewRisk}">Unknown</td>
+						<td th:text="${po.riskScore}">Unknown</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -75,17 +190,17 @@
 
 	<script>
 		$(function() {
-			$('.js-progress').click(function (){
+			$('.js-progress').click(function() {
 				$('.masking').css('display', 'block');
 				$('body').css('overflow', 'hidden');
-				
-				setTimeout(function (){
-					var progress = setInterval(function (){
-						$.getJSON('/po/progress', function (data){
+
+				setTimeout(function() {
+					var progress = setInterval(function() {
+						$.getJSON('/po/progress', function(data) {
 							$('div.progress-bar').attr('aria-valuemax', data);
 							$('div.progress-bar').css('width', data + '%');
 							$('div.progress-bar').text(data + '% Complete');
-							
+
 							if (data == 100) {
 								clearInterval(progress);
 							}
