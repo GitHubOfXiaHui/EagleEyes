@@ -79,16 +79,19 @@
 				$('.masking').css('display', 'block');
 				$('body').css('overflow', 'hidden');
 				
-				var progress = setInterval(function (){
-					$.getJSON('/po/progress', function (data){
-						if (data == 100) {
-							clearInterval(progress);
-						}
-						$('div.progress-bar').attr('aria-valuemax', data);
-						$('div.progress-bar').css('width', data + '%');
-						$('div.progress-bar').text(data + '% Complete')
-					});
-				}, 2000);
+				setTimeout(function (){
+					var progress = setInterval(function (){
+						$.getJSON('/po/progress', function (data){
+							$('div.progress-bar').attr('aria-valuemax', data);
+							$('div.progress-bar').css('width', data + '%');
+							$('div.progress-bar').text(data + '% Complete');
+							
+							if (data == 100) {
+								clearInterval(progress);
+							}
+						});
+					}, 200);
+				}, 1000);
 			});
 		});
 	</script>

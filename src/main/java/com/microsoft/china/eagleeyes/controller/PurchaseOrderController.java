@@ -44,9 +44,7 @@ public class PurchaseOrderController {
 	
 	@RequestMapping(path = "/progress", method = RequestMethod.GET)
 	public @ResponseBody int progress() {
-		int progress = purchaseOrderService.getProgress();
-		System.out.println(progress);
-		return progress;
+		return purchaseOrderService.getProgress();
 	}
 	
 	private static final String PO = "po";

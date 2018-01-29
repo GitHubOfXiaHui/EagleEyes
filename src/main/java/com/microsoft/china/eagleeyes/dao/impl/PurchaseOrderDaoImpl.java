@@ -23,6 +23,12 @@ public class PurchaseOrderDaoImpl implements PurchaseOrderDaoPlus {
 	public int getProgress() {
 		return (progress * 100) / total;
 	}
+	
+	@Override
+	public void resetProgress() {
+		progress = 0;
+		total = 1;
+	}
 
 	@Transactional
 	@Override
@@ -37,6 +43,7 @@ public class PurchaseOrderDaoImpl implements PurchaseOrderDaoPlus {
 		total = pos.size();
 		for (PurchaseOrder po : pos) {
 			em.persist(po);
+			result.add(po);
 			if (progress % BATCH == 0) {
 				em.flush();
 				em.clear();
@@ -59,7 +66,7 @@ public class PurchaseOrderDaoImpl implements PurchaseOrderDaoPlus {
 		progress = 0;
 		total = pos.size();
 		for (PurchaseOrder po : pos) {
-			em.merge(po);
+			result.add(em.merge(po));
 			if (progress % BATCH == 0) {
 				em.flush();
 				em.clear();

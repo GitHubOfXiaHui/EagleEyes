@@ -29,11 +29,13 @@ public class ViolationServiceImpl implements ViolationService {
 	@Transactional
 	@Override
 	public List<Violation> upload(MultipartFile violationFile) throws IOException {
-		Workbook wb = ExcelUtil.createWorkbook(violationFile.getInputStream(), violationFile.getOriginalFilename());
-		Sheet sheet = wb.getSheet("POViolationList");
-		Map<String, Integer> head = ExcelUtil.getHead(sheet);
-		List<Violation> body = getBody(sheet, head);
-		return body;
+		try (Workbook wb = ExcelUtil.createWorkbook(violationFile.getInputStream(),
+				violationFile.getOriginalFilename())) {
+			Sheet sheet = wb.getSheet("POViolationList");
+			Map<String, Integer> head = ExcelUtil.getHead(sheet.getRow(sheet.getFirstRowNum()));
+			List<Violation> body = getBody(sheet, head);
+			return body;
+		}
 	}
 
 	private List<Violation> getBody(Sheet sheet, Map<String, Integer> head) {

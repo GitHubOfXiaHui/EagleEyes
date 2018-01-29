@@ -8,9 +8,10 @@ import java.util.Map;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.monitorjbl.xlsx.StreamingReader;
 
 public abstract class ExcelUtil {
 
@@ -23,10 +24,17 @@ public abstract class ExcelUtil {
 			throw new IOException();
 		}
 	}
-	
-	public static Map<String, Integer> getHead(Sheet sheet) {
+
+	public static Workbook createWorkbook(InputStream is, String filename, boolean useless) throws IOException {
+		if (filename.endsWith(EXCEL2007)) {
+			return StreamingReader.builder().rowCacheSize(100).bufferSize(4096).open(is);
+		} else {
+			throw new IOException();
+		}
+	}
+
+	public static Map<String, Integer> getHead(Row firstRow) {
 		Map<String, Integer> head = new LinkedHashMap<>();
-		Row firstRow = sheet.getRow(sheet.getFirstRowNum());
 		int first = firstRow.getFirstCellNum(), last = firstRow.getLastCellNum();
 		for (int i = first; i < last; i++) {
 			Cell cell = firstRow.getCell(i);
@@ -34,7 +42,7 @@ public abstract class ExcelUtil {
 		}
 		return head;
 	}
-	
+
 	private static final String EXCEL2003 = "xls";
 	private static final String EXCEL2007 = "xlsx";
 }

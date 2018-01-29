@@ -8,6 +8,8 @@ public interface PurchaseOrderDaoPlus {
 
 	int getProgress();
 	
+	void resetProgress();
+	
 	List<PurchaseOrder> saveBatch(List<PurchaseOrder> pos);
 	
 	List<PurchaseOrder> updateBatch(List<PurchaseOrder> pos);

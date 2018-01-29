@@ -55,7 +55,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	public List<PurchaseOrder> findAll() {
 		return purchaseOrderDao.findAll();
 	}
-	
+
 	@Override
 	public int getProgress() {
 		return purchaseOrderDao.getProgress();
@@ -64,19 +64,26 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	@Transactional
 	@Override
 	public List<PurchaseOrder> upload(MultipartFile poFile) throws IOException {
-		Workbook wb = ExcelUtil.createWorkbook(poFile.getInputStream(), poFile.getOriginalFilename());
-		Sheet sheet = wb.getSheet("Sheet1");
-		Map<String, Integer> head = ExcelUtil.getHead(sheet);
-		List<PurchaseOrder> body = getBody(sheet, head);
-		return body;
+		// 重置progress，防止前端读到上一次的进度
+		purchaseOrderDao.resetProgress();
+
+		try (Workbook wb = ExcelUtil.createWorkbook(poFile.getInputStream(), poFile.getOriginalFilename(), true)) {
+			Sheet sheet = wb.getSheet("Sheet1");
+			List<PurchaseOrder> body = getBody(sheet);
+			return body;
+		}
 	}
 
-	private List<PurchaseOrder> getBody(Sheet sheet, Map<String, Integer> head) {
-		int first = sheet.getFirstRowNum();
-		int last = sheet.getLastRowNum();
-		List<PurchaseOrder> body = new ArrayList<>(last - first);
-		for (int i = first + 1; i <= last; i++) {
-			Row row = sheet.getRow(i);
+	private List<PurchaseOrder> getBody(Sheet sheet) {
+		Map<String, Integer> head = null;
+		List<PurchaseOrder> body = new ArrayList<>();
+		boolean first = true;
+		for (Row row : sheet) {
+			if (first) {
+				head = ExcelUtil.getHead(row);
+				first = false;
+				continue;
+			}
 			PurchaseOrder po = new PurchaseOrder();
 			po.setPoNumber(
 					Optional.ofNullable(row.getCell(head.get("PO Number"))).map(Cell::getStringCellValue).orElse(null));
@@ -134,9 +141,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 					.orElse(null));
 			body.add(po);
 		}
-		
+
 		purchaseOrderDao.deleteAll();
-		return purchaseOrderDao.save(body);
+		return purchaseOrderDao.saveBatch(body);
 	}
 
 	private TreeMap<String, Set<String>> ownerMap = new TreeMap<>();;
@@ -167,8 +174,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	private Set<String> submitters = new HashSet<>();
 	private Set<String> vendors = new HashSet<>();
 
+	@Transactional
 	@Override
 	public List<PurchaseOrder> calculate() {
+		// 重置progress，防止前端读到上一次的进度
+		purchaseOrderDao.resetProgress();
+
 		List<PurchaseOrder> pos = purchaseOrderDao.findAll();
 
 		// 计算parse POCreate Date & InvoiceDateLast
@@ -218,8 +229,8 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 			// 求和
 			step7(po);
 		});
-		
-		return purchaseOrderDao.save(pos);
+
+		return purchaseOrderDao.updateBatch(pos);
 	}
 
 	private void step1(List<PurchaseOrder> pos) {
