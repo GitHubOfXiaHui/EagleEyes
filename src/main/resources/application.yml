@@ -1,13 +1,33 @@
+# 数据库连接配置
 spring:
-  thymeleaf:
-    cache: false
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/eagleeyes?useSSL=true
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+
+---
+# 开发环境
+server:
+  port: 8080
+spring:
+  thymeleaf:
+    cache: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      
+---
+# 生产环境
+server:
+  port: 8081
+spring:
+  profiles: prod
+  thymeleaf:
+    cache: true
   jpa:
     show-sql: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
       
