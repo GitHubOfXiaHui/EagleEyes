@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.microsoft.china.eagleeyes.entity.PurchaseOrder;
 import com.microsoft.china.eagleeyes.service.PurchaseOrderService;
 
 @Controller
-@RequestMapping("/po")
+@RequestMapping("po")
 public class PurchaseOrderController {
 	
 	@Autowired
@@ -29,19 +30,17 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping(path = "/upload", method = RequestMethod.POST)
-	public String upload(MultipartFile poFile, Model model) throws IOException {
-		List<PurchaseOrder> pos = purchaseOrderService.upload(poFile);
-		model.addAttribute("pos", pos);
-		model.addAttribute("uploaded", true);
-		return PO;
+	public String upload(MultipartFile poFile, RedirectAttributes model) throws IOException {
+		purchaseOrderService.upload(poFile);
+		model.addFlashAttribute("uploaded", true);
+		return REDIRECT_LIST;
 	}
 	
 	@RequestMapping(path = "/calculate", method = RequestMethod.GET)
-	public String share(Model model) {
-		List<PurchaseOrder> pos = purchaseOrderService.calculate();
-		model.addAttribute("pos", pos);
-		model.addAttribute("calculated", true);
-		return PO;
+	public String share(RedirectAttributes model) {
+		purchaseOrderService.calculate();
+		model.addFlashAttribute("calculated", true);
+		return REDIRECT_LIST;
 	}
 	
 	@RequestMapping(path = "/progress", method = RequestMethod.GET)
@@ -50,4 +49,5 @@ public class PurchaseOrderController {
 	}
 	
 	private static final String PO = "po";
+	private static final String REDIRECT_LIST = "redirect:list";
 }

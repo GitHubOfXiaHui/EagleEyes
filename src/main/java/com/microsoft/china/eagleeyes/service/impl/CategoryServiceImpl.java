@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Category> upload(MultipartFile categoryFile) throws IOException {
 		try (Workbook wb = ExcelUtil.createWorkbook(categoryFile.getInputStream(),
 				categoryFile.getOriginalFilename())) {
-			Sheet sheet = wb.getSheet("PO Categories");
+			Sheet sheet = wb.getSheet("Sheet1");
 			Map<String, Integer> head = ExcelUtil.getHead(sheet.getRow(sheet.getFirstRowNum()));
 			List<Category> body = getBody(sheet, head);
 			return body;

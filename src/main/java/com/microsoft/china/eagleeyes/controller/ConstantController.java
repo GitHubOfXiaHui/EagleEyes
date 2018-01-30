@@ -12,7 +12,7 @@ import com.microsoft.china.eagleeyes.entity.Constant;
 import com.microsoft.china.eagleeyes.service.ConstantService;
 
 @Controller
-@RequestMapping("/constant")
+@RequestMapping("constant")
 public class ConstantController {
 
 	@Autowired
@@ -35,12 +35,11 @@ public class ConstantController {
 	}
 
 	@RequestMapping(path = "/edit", method = RequestMethod.POST)
-	public String edit(Constant constant, Model model) {
+	public String edit(Constant constant) {
 		constantService.update(constant);
-		List<Constant> constants = constantService.findAll();
-		model.addAttribute("constants", constants);
-		return CONSTANT;
+		return REDIRECT_LIST;
 	}
 
 	private static final String CONSTANT = "constant";
+	private static final String REDIRECT_LIST = "redirect:list";
 }

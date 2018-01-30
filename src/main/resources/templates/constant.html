@@ -18,7 +18,7 @@
     <![endif]-->
 </head>
 <body>
-	<nav th:include="nav::nav('constant')" class="navbar navbar-inverse"></nav>
+	<nav th:replace="nav::nav('constant')"></nav>
 	<div class="container">
 		<form class="form-inline" action="/constant/search" method="POST"
 			role="form">
@@ -58,6 +58,8 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<footer th:replace="footer::footer"></footer>
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" role="dialog">

@@ -18,7 +18,7 @@
     <![endif]-->
 </head>
 <body>
-	<nav th:include="nav::nav('violation')" class="navbar navbar-inverse"></nav>
+	<nav th:replace="nav::nav('violation')"></nav>
 	<div class="container">
 		<form class="form-inline" role="form" enctype="multipart/form-data"
 			method="POST" action="/violation/upload">
@@ -64,6 +64,8 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<footer th:replace="footer::footer"></footer>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="/jQuery/jquery-3.2.1.min.js"></script>

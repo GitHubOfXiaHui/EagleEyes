@@ -18,10 +18,228 @@
     <![endif]-->
 </head>
 <body>
-	<nav th:include="nav::nav('about')" class="navbar navbar-inverse"></nav>
+	<nav th:replace="nav::nav('about')"></nav>
+	
 	<div class="container">
-		
+		<h3>说明</h3>
+		<h3>1. 系统分为5个页面</h3>
+		<p>PurchaseOrder、Violation、Constant、Category和About.</p>
+		<h3>1.1 PurchaseOrder</h3>
+		<p>显示采购订单信息，用户可以上传订单文件，计算订单的风险标志和风险值，并且可以利用Power BI展示订单信息。Power BI每天整点更新。</p>
+		<p>表1显示了订单文件结构信息，上传前请仔细检查，保证订单信息存放在Sheet1中，表头及类型与表1保持一致。</p>
+		<table class="table table-striped" style="width: 70%;">
+			<caption class="text-center">表1 订单文件结构</caption>
+			<thead>
+				<tr>
+					<th>字段名称</th>
+					<th>字段类型</th>
+					<th>备注</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>PO Number</td>
+					<td>Text</td>
+					<td>订单编号</td>
+				</tr>
+				<tr>
+					<td>POAmountTotal RMB</td>
+					<td>Number</td>
+					<td>订单估计金额</td>
+				</tr>
+				<tr>
+					<td>InvoiceAmountTotal RMB</td>
+					<td>Number</td>
+					<td>订单开票金额</td>
+				</tr>
+				<tr>
+					<td>InvoiceDateFirst</td>
+					<td>Date</td>
+					<td>订单首次开票日期</td>
+				</tr>
+				<tr>
+					<td>InvoiceDateLast</td>
+					<td>Date</td>
+					<td>订单最后开票日期</td>
+				</tr>
+				<tr>
+					<td>PO.Count</td>
+					<td>Number</td>
+					<td>订单计数</td>
+				</tr>
+				<tr>
+					<td>PO.Category</td>
+					<td>Text</td>
+					<td>订单类型</td>
+				</tr>
+				<tr>
+					<td>PO.Category Group</td>
+					<td>Text</td>
+					<td>订单大类</td>
+				</tr>
+				<tr>
+					<td>Company Code</td>
+					<td>Number</td>
+					<td>公司代码</td>
+				</tr>
+				<tr>
+					<td>PO.Created Date_ApprovedDate</td>
+					<td>Date</td>
+					<td>订单创建日期，即批准日期</td>
+				</tr>
+				<tr>
+					<td>PO.Description</td>
+					<td>Text</td>
+					<td>订单描述信息</td>
+				</tr>
+				<tr>
+					<td>PO.Owner Alias</td>
+					<td>Text</td>
+					<td>订单拥有者Alias</td>
+				</tr>
+				<tr>
+					<td>PO.Owner Name</td>
+					<td>Text</td>
+					<td>订单拥有者Name</td>
+				</tr>
+				<tr>
+					<td>PO.Submitted By Alias</td>
+					<td>Text</td>
+					<td>订单提交者Alias</td>
+				</tr>
+				<tr>
+					<td>PO.Submitted By Name</td>
+					<td>Text</td>
+					<td>订单提交者Name</td>
+				</tr>
+				<tr>
+					<td>PO.Supplier Number</td>
+					<td>Number</td>
+					<td>订单供应商编号</td>
+				</tr>
+				<tr>
+					<td>PO.Supplier Name</td>
+					<td>Text</td>
+					<td>订单供应商Name</td>
+				</tr>
+				<tr>
+					<td>PO.Start Date</td>
+					<td>Date</td>
+					<td>订单执行日期</td>
+				</tr>
+				<tr>
+					<td>PO.Approver.Alias</td>
+					<td>Text</td>
+					<td>订单批准者Alias</td>
+				</tr>
+				<tr>
+					<td>PO.Appover Name</td>
+					<td>Text</td>
+					<td>订单批准者Name</td>
+				</tr>
+				<tr>
+					<td>PO.Approver Type</td>
+					<td>Text</td>
+					<td>订单批准者Type</td>
+				</tr>
+				<tr>
+					<td>SAPPOStatus</td>
+					<td>Text</td>
+					<td>订单状态</td>
+				</tr>
+				<tr>
+					<td>PO Owner.Region</td>
+					<td>Text</td>
+					<td>订单拥有者Region</td>
+				</tr>
+				<tr>
+					<td>PO Owner.Segment</td>
+					<td>Text</td>
+					<td>订单拥有者Segment</td>
+				</tr>
+				<tr>
+					<td>PO Owner.GSMO</td>
+					<td>Text</td>
+					<td>订单拥有者GSMO</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>1.2 Violation</h3>
+		<p>显示前12个月有失败订单的人员信息，因为需要参与计算订单风险值，请在计算订单风险之前上传该文件。</p>
+		<p>表2显示了失败订单人员文件结构，上传前请仔细检查，保证人员信息存放在Sheet1中，表头及类型与表2保持一致。</p>
+		<table class="table table-striped" style="width: 70%;">
+			<caption class="text-center">表1 订单文件结构</caption>
+			<thead>
+				<tr>
+					<th>字段名称</th>
+					<th>字段类型</th>
+					<th>备注</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Report Year</td>
+					<td>Text</td>
+					<td>财年</td>
+				</tr>
+				<tr>
+					<td>Report Month</td>
+					<td>Text</td>
+					<td>月份</td>
+				</tr>
+				<tr>
+					<td>PO Number</td>
+					<td>Text</td>
+					<td>订单编号</td>
+				</tr>
+				<tr>
+					<td>PO Submitter</td>
+					<td>Text</td>
+					<td>订单提交者Alias</td>
+				</tr>
+				<tr>
+					<td>Sample Owner</td>
+					<td>Text</td>
+					<td>订单拥有者Alias</td>
+				</tr>
+				<tr>
+					<td>Vendor Name</td>
+					<td>Text</td>
+					<td>订单供应商Name</td>
+				</tr>
+				<tr>
+					<td>Vendor ID</td>
+					<td>Number</td>
+					<td>订单供应商编号</td>
+				</tr>
+				<tr>
+					<td>C&amp;C Comments</td>
+					<td>Text</td>
+					<td>备注</td>
+				</tr>
+				<tr>
+					<td>Testing Result</td>
+					<td>Text</td>
+					<td>测试结果</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>1.3 Constant</h3>
+		<p>显示系统中使用的各种常量信息，点击表行可以编辑对应的常量。</p>
+		<h3>1.4 Category</h3>
+		<p>显示采购订单类型对应的分值，点击表行可以编辑对应的分值。</p>
+		<h3>使用步骤</h3>
+		<ol>
+			<li>检查Constant页面，确定是否需要修改常量值；</li>
+			<li>检查Category页面，确定是否需要修改类型分值；</li>
+			<li>检查并上传失败订单人员文件，文件类型必须是Excel，后缀名可以是.xls或.xlsx；</li>
+			<li>检查并上传采购订单文件，文件类型必须是Excel，后缀名必须是.xlsx；</li>
+			<li>计算订单风险标记和风险值。</li>
+		</ol>
+		<h4>点击<a href="/download/About Eagle Eyes Project.docx">下载</a>样例</h4>
 	</div>
+	
+	<footer th:replace="footer::footer"></footer>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="/jQuery/jquery-3.2.1.min.js"></script>

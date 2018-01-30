@@ -18,7 +18,7 @@
     <![endif]-->
 </head>
 <body>
-	<nav th:include="nav::nav('category')" class="navbar navbar-inverse"></nav>
+	<nav th:replace="nav::nav('category')"></nav>
 	<div class="container">
 		<!-- 初始化时，可以打开该注释，上传订单类型文件 -->
 		<!-- <form class="form-inline" role="form" enctype="multipart/form-data"
@@ -72,6 +72,8 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<footer th:replace="footer::footer"></footer>
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" role="dialog">
